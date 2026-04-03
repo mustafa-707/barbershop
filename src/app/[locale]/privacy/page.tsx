@@ -1,9 +1,7 @@
 import { Shield } from "lucide-react";
-import { getTranslations } from "next-intl/server";
 
 export default async function PrivacyPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const t = await getTranslations("Common");
 
   return (
     <div className="container mx-auto max-w-4xl py-24 px-6 relative z-10" dir={locale === 'ar' ? 'rtl' : 'ltr'}>

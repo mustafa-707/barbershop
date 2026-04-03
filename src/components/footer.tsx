@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl";
 export function Footer({ openingHoursEn, openingHoursAr, locale }: { openingHoursEn?: string | null, openingHoursAr?: string | null, locale?: string }) {
   const t = useTranslations("Nav");
   const hoursData = locale === 'ar' ? openingHoursAr : openingHoursEn;
-  const finalHours = hoursData || (locale === 'ar' ? "الإثنين-السبت: ١٠ص - ٩م | الأحد: مغلق" : "Mon-Sat: 10AM - 9PM | Sun: Closed");
+  const finalHours = hoursData ?? (locale === 'ar' ? "الإثنين-السبت: ١٠ص - ٩م | الأحد: مغلق" : "Mon-Sat: 10AM - 9PM | Sun: Closed");
   
   return (
     <footer className="border-t border-border/10 bg-black/5 dark:bg-black/20 pt-16 pb-8 backdrop-blur-3xl overflow-hidden relative">

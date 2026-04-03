@@ -4,11 +4,10 @@ import { Search, ShoppingBag } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { api } from "~/trpc/react"
-import { useCart } from "~/store/cart"
 import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
 import { Skeleton } from "~/components/ui/skeleton"
-import { ProductCard } from "./product-card"
+import { ProductCard, type Product } from "./product-card"
 import { cn } from "~/lib/utils" // Added this import as it's used in the snippet
 
 export function ProductGrid() {
@@ -84,7 +83,7 @@ export function ProductGrid() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.4 }}
               >
-                <ProductCard product={product as import("./product-card").Product} />
+                <ProductCard product={product as Product} />
               </motion.div>
             ))
         )}
