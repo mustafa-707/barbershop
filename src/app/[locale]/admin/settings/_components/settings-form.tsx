@@ -28,6 +28,8 @@ const settingsSchema = z.object({
   mapUrl: z.string().optional().nullable(),
   descriptionEn: z.string().optional().nullable(),
   descriptionAr: z.string().optional().nullable(),
+  openingHoursEn: z.string().optional().nullable(),
+  openingHoursAr: z.string().optional().nullable(),
   logoUrl: z.string().optional().nullable(),
   faviconUrl: z.string().optional().nullable(),
 })
@@ -41,6 +43,8 @@ export function SettingsForm({ initialData }: { initialData?: {
   mapUrl?: string | null;
   descriptionEn?: string | null;
   descriptionAr?: string | null;
+  openingHoursEn?: string | null;
+  openingHoursAr?: string | null;
   logoUrl?: string | null;
   faviconUrl?: string | null;
 } | null }) {
@@ -68,6 +72,8 @@ export function SettingsForm({ initialData }: { initialData?: {
       mapUrl: initialData?.mapUrl ?? "",
       descriptionEn: initialData?.descriptionEn ?? "",
       descriptionAr: initialData?.descriptionAr ?? "",
+      openingHoursEn: initialData?.openingHoursEn ?? "",
+      openingHoursAr: initialData?.openingHoursAr ?? "",
       logoUrl: initialData?.logoUrl ?? "",
       faviconUrl: initialData?.faviconUrl ?? "",
     },
@@ -138,6 +144,32 @@ export function SettingsForm({ initialData }: { initialData?: {
                     <FormLabel className="font-bold">{t('descriptionAr')}</FormLabel>
                     <FormControl>
                       <Textarea {...field} value={field.value ?? ""} className="min-h-[120px] rounded-xl bg-background/50 border-white/10 text-lg text-right resize-none" dir="rtl" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="openingHoursEn"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="font-bold">Opening Hours (English)</FormLabel>
+                    <FormControl>
+                      <Input {...field} value={field.value ?? ""} placeholder="Mon-Sat: 10AM - 9PM | Sun: Closed" className="h-14 rounded-xl bg-background/50 border-white/10 text-lg" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="openingHoursAr"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="font-bold">Opening Hours (Arabic)</FormLabel>
+                    <FormControl>
+                      <Input {...field} value={field.value ?? ""} placeholder="الإثنين-السبت: ١٠ص - ٩م | الأحد: مغلق" className="h-14 rounded-xl bg-background/50 border-white/10 text-lg text-right" dir="rtl" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

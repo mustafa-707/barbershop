@@ -102,6 +102,8 @@ export const settings = createTable("setting", (t) => ({
   id: uuid("id").defaultRandom().primaryKey(),
   siteNameEn: t.varchar("siteNameEn", { length: 255 }).default("BarberShop"),
   siteNameAr: t.varchar("siteNameAr", { length: 255 }).default("صالون الحلاقة"),
+  openingHoursEn: t.varchar("openingHoursEn", { length: 255 }).default("Mon-Sat: 10AM - 9PM | Sun: Closed"),
+  openingHoursAr: t.varchar("openingHoursAr", { length: 255 }).default("الإثنين-السبت: ١٠ص - ٩م | الأحد: مغلق"),
   contactPhone: t.varchar("contactPhone", { length: 255 }),
   contactEmail: t.varchar("contactEmail", { length: 255 }),
   mapUrl: t.text("mapUrl"),

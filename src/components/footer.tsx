@@ -4,8 +4,10 @@ import { Link } from "~/i18n/routing";
 import { Scissors, Phone, Mail, MapPin } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-export function Footer() {
+export function Footer({ openingHoursEn, openingHoursAr, locale }: { openingHoursEn?: string | null, openingHoursAr?: string | null, locale?: string }) {
   const t = useTranslations("Nav");
+  const hoursData = locale === 'ar' ? openingHoursAr : openingHoursEn;
+  const finalHours = hoursData || (locale === 'ar' ? "الإثنين-السبت: ١٠ص - ٩م | الأحد: مغلق" : "Mon-Sat: 10AM - 9PM | Sun: Closed");
   
   return (
     <footer className="border-t border-border/10 bg-black/5 dark:bg-black/20 pt-16 pb-8 backdrop-blur-3xl overflow-hidden relative">
@@ -65,18 +67,14 @@ export function Footer() {
           <div className="space-y-6">
             <h4 className="text-lg font-black uppercase tracking-widest text-foreground">Opening Hours</h4>
             <ul className="space-y-4">
-              <li className="flex justify-between items-center text-muted-foreground font-medium border-b border-border/10 pb-2">
-                <span>Mon - Fri</span>
-                <span>9:00 AM - 9:00 PM</span>
-              </li>
-              <li className="flex justify-between items-center text-muted-foreground font-medium border-b border-border/10 pb-2">
-                <span>Saturday</span>
-                <span>10:00 AM - 8:00 PM</span>
-              </li>
-              <li className="flex justify-between items-center text-primary font-black pb-2">
-                <span>Sunday</span>
-                <span>Closed</span>
-              </li>
+              {finalHours.split('|').map((line, idx) => (
+                 <li key={idx} className="flex justify-between items-center text-muted-foreground font-medium border-b border-border/10 pb-2">
+                   <span>{line.split(':')[0]}</span>
+                   <span className={line.toLowerCase().includes('closed') || line.toLowerCase().includes('مغلق') ? 'text-primary font-bold' : ''}>
+                     {line.split(':').slice(1).join(':')}
+                   </span>
+                 </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -86,8 +84,8 @@ export function Footer() {
             &copy; {new Date().getFullYear()} BarberShop. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <Link href="/" className="text-sm text-muted-foreground hover:text-primary transition-colors font-medium">Privacy Policy</Link>
-            <Link href="/" className="text-sm text-muted-foreground hover:text-primary transition-colors font-medium">Terms of Service</Link>
+            <Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors font-medium">Privacy Policy</Link>
+            <Link href="/terms" className="text-sm text-muted-foreground hover:text-primary transition-colors font-medium">Terms of Service</Link>
           </div>
         </div>
       </div>

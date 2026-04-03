@@ -13,6 +13,8 @@ export const settingsRouter = createTRPCRouter({
       z.object({
         siteNameEn: z.string().min(1),
         siteNameAr: z.string().min(1),
+        openingHoursEn: z.string().optional().nullable(),
+        openingHoursAr: z.string().optional().nullable(),
         contactPhone: z.string().optional().nullable(),
         contactEmail: z.string().email().optional().nullable().or(z.literal("")),
         mapUrl: z.string().optional().nullable(),

@@ -1,4 +1,5 @@
 import "~/styles/globals.css";
+import { db } from "~/server/db";
 
 import { type Metadata, type Viewport } from "next";
 import { Inter, Cairo } from "next/font/google";
@@ -47,6 +48,7 @@ export default async function RootLayout({
 }: Readonly<{ children: React.ReactNode; params: Promise<{ locale: string }> }>) {
   const { locale } = await params;
   const messages = await getMessages();
+  const settings = await db.query.settings.findFirst();
 
   return (
     <html suppressHydrationWarning lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} className={`${inter.variable} ${cairo.variable}`}>
@@ -65,7 +67,7 @@ export default async function RootLayout({
                   <main className="flex-1 pb-16">
                     {children}
                   </main>
-                  <Footer />
+                  <Footer openingHoursEn={settings?.openingHoursEn} openingHoursAr={settings?.openingHoursAr} locale={locale} />
                   <Toaster position="top-center" richColors />
                 </div>
               </AuthProvider>

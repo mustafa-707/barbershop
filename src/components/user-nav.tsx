@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu"
 import { LogOut, User, LayoutDashboard } from "lucide-react"
-import { signOut, useSession } from "next-auth/react"
+import { signIn, signOut, useSession } from "next-auth/react"
 import { Link } from "~/i18n/routing"
 import { useTranslations } from 'next-intl'
 import { motion } from "framer-motion"
@@ -22,11 +22,9 @@ export function UserNav() {
 
   if (!session) {
     return (
-      <Button variant="ghost" className="rounded-full px-6 h-11 bg-white/5 hover:bg-white/10 border border-white/10" asChild>
-        <Link href="/api/auth/signin">
-          <User className="mr-2 h-4 w-4" />
-          {t('login')}
-        </Link>
+      <Button onClick={() => signIn()} variant="ghost" className="rounded-full px-6 h-11 bg-white/5 hover:bg-white/10 border border-white/10">
+        <User className="mr-2 h-4 w-4" />
+        {t('login')}
       </Button>
     )
   }
