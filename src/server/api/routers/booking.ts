@@ -8,12 +8,16 @@ export const bookingRouter = createTRPCRouter({
     .input(z.object({
       guestName: z.string().optional(),
       guestPhone: z.string().optional(),
+      serviceId: z.string().uuid().optional().nullable(),
+      barberId: z.string().uuid().optional().nullable(),
       bookingTime: z.date(),
     }))
     .mutation(async ({ ctx, input }) => {
       const newBookings = await ctx.db.insert(bookings).values({
         guestName: input.guestName,
         guestPhone: input.guestPhone,
+        serviceId: input.serviceId,
+        barberId: input.barberId,
         bookingTime: input.bookingTime,
         userId: ctx.session?.user?.id,
         status: "PENDING",
@@ -24,6 +28,10 @@ export const bookingRouter = createTRPCRouter({
   getAll: publicProcedure.query(async ({ ctx }) => {
     return ctx.db.query.bookings.findMany({
       orderBy: [desc(bookings.bookingTime)],
+      with: {
+        service: true,
+        barber: true,
+      }
     });
   }),
   updateStatus: publicProcedure

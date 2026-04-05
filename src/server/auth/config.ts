@@ -4,6 +4,7 @@ import { eq } from "drizzle-orm";
 
 import { db } from "~/server/db";
 import { users } from "~/server/db/schema";
+import bcrypt from "bcryptjs";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -43,24 +44,39 @@ export const authConfig = {
       async authorize(credentials) {
         if (!credentials?.phone) return null;
         
-        const phone = credentials.phone as string;
+        const identifier = credentials.phone as string;
         const name = (credentials.name as string) || "Anonymous";
         const password = credentials.password as string | undefined;
         const ADMIN_SECRET = process.env.ADMIN_PASSWORD ?? "admin123";
 
+        // Support both phone and email login
+        const isEmailLogin = identifier.includes("@");
+        
         let user = await db.query.users.findFirst({
-          where: eq(users.phone, phone)
+          where: isEmailLogin 
+            ? eq(users.email, identifier)
+            : eq(users.phone, identifier)
         });
 
-        if (user?.role === "ADMIN" && password !== ADMIN_SECRET) {
+        let isValidPassword = false;
+        if (password && user?.hashedPassword) {
+            isValidPassword = bcrypt.compareSync(password, user.hashedPassword);
+        }
+
+        const isSettingAdmin = !!password && password === ADMIN_SECRET;
+
+        // If user is ADMIN, they must provide a valid password or the admin secret
+        if (user?.role === "ADMIN" && !isSettingAdmin && !isValidPassword) {
           throw new Error("Invalid admin password");
         }
 
-        const isSettingAdmin = password === ADMIN_SECRET;
-
         if (!user) {
+          // Only create new users for phone-based registration (not email)
+          if (isEmailLogin) {
+            throw new Error("No account found with this email");
+          }
           const newUsers = await db.insert(users).values({
-            phone,
+            phone: identifier,
             name,
             role: isSettingAdmin ? "ADMIN" : "USER"
           }).returning();

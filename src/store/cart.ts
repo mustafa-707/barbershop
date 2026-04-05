@@ -37,6 +37,10 @@ export const useCart = create<CartStore>()(
         set({ items: get().items.filter((i) => i.productId !== productId) });
       },
       updateQuantity: (productId, quantity) => {
+        if (quantity <= 0) {
+          set({ items: get().items.filter((i) => i.productId !== productId) });
+          return;
+        }
         set({
           items: get().items.map((i) =>
             i.productId === productId ? { ...i, quantity } : i

@@ -26,39 +26,38 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -12, scale: 1.02 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className="h-full group/card"
     >
-      <div className="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden glass dark:glass-dark border border-foreground/5 transition-all duration-700 group-hover/card:border-primary/40 group-hover/card:shadow-[0_40px_100px_-20px_rgba(var(--primary),0.2)]">
-        {/* Minimal Image */}
-        {product.imageUrl ? (
-          <Image 
-            src={product.imageUrl} 
-            alt={product.nameEn} 
-            fill 
-            className="object-cover transition-transform duration-1000 ease-out group-hover/card:scale-110 opacity-70 group-hover/card:opacity-100" 
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-foreground/5">
-            <ShoppingBag className="w-12 h-12 text-foreground/20" />
+      <Link href={`/products/${product.id}`} className="block space-y-6">
+        <div className="relative aspect-[4/5] overflow-hidden bg-foreground/[0.03] transition-all duration-700 group-hover/card:bg-foreground/[0.05]">
+          {product.imageUrl ? (
+            <Image 
+              src={product.imageUrl} 
+              alt={product.nameEn} 
+              fill 
+              className="object-cover transition-transform duration-1000 ease-out group-hover/card:scale-105 opacity-80 group-hover/card:opacity-100 grayscale hover:grayscale-0" 
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center">
+              <ShoppingBag className="w-8 h-8 text-foreground/10" />
+            </div>
+          )}
+
+          {/* Minimal Price Tag */}
+          <div className="absolute bottom-6 left-6 z-20">
+             <span className="text-sm font-bold text-foreground uppercase tracking-widest bg-background px-4 py-2">
+                {product.price}
+             </span>
           </div>
-        )}
 
-        {/* Floating Minimal Price */}
-        <div className="absolute top-8 right-8 z-20">
-           <span className="text-xl font-black text-primary tracking-tighter drop-shadow-2xl">
-              {product.price}
-           </span>
-        </div>
-
-        {/* Hover Overlay: Minimal Add to Cart */}
-        <div className="absolute inset-0 z-10 bg-background/80 backdrop-blur-sm opacity-0 group-hover/card:opacity-100 transition-all duration-500 flex flex-col items-center justify-center p-8 text-center">
-            <Button 
-                className="w-full h-16 btn-premium shadow-2xl scale-90 group-hover/card:scale-100 transition-transform duration-500"
+          {/* Quick Action Overlay */}
+          <div className="absolute inset-0 z-10 bg-background/20 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+             <Button 
+                variant="outline"
+                className="rounded-none border-foreground text-foreground hover:bg-foreground hover:text-background h-12 px-8 text-[10px] font-black uppercase tracking-[0.3em] transition-all"
                 onClick={(e) => {
                   e.preventDefault();
                   addItem({
@@ -68,28 +67,22 @@ export function ProductCard({ product }: { product: Product }) {
                   })
                 }}
             >
-                <ShoppingBag className="w-5 h-5 mr-3" />
                 {t('addToCart')}
             </Button>
-            <Link href={`/products/${product.id}`} className="mt-6 text-foreground/50 hover:text-primary text-xs font-black tracking-[0.3em] uppercase transition-all duration-300 hover:tracking-[0.4em]">
-               {t('viewDetails')}
-            </Link>
+          </div>
         </div>
 
-        {/* NEW Badge (Tiny Dot/Line style) */}
-        {product.isNewProd && (
-           <div className="absolute top-10 left-10 h-3 w-3 bg-primary rounded-full shadow-gold animate-pulse-slow" />
-        )}
-      </div>
-
-      <div className="pt-8 pb-4 text-center space-y-2">
-         <h3 className="text-3xl font-black tracking-tighter text-foreground group-hover/card:text-primary transition-all duration-500 uppercase">
-           {product.nameEn}
-         </h3>
-         <p className="text-sm font-bold text-foreground/40 uppercase tracking-[0.4em] transition-all duration-500 group-hover/card:text-foreground/70">
-           {product.nameAr}
-         </p>
-      </div>
+        <div className="space-y-2">
+          <div className="flex items-baseline justify-between gap-4">
+            <h3 className="text-lg font-bold uppercase tracking-widest text-foreground transition-all duration-500">
+              {product.nameEn}
+            </h3>
+          </div>
+          <p className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em]">
+            {product.nameAr}
+          </p>
+        </div>
+      </Link>
     </motion.div>
   )
 }

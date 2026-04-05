@@ -13,27 +13,25 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
   return (
     <HydrateClient>
-      <div className="flex flex-col min-h-screen bg-vibrant-gradient">
+      <div className="flex flex-col min-h-screen bg-background">
         {/* Booking CTA Section */}
         <BookingCta />
 
-        <div className="container mx-auto max-w-7xl px-4 py-20 space-y-32">
+        <div className="container mx-auto max-w-7xl px-6 py-32 space-y-48">
           {/* Latest Products Carousel */}
-          <section className="space-y-12">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 border-l-4 border-primary pl-8">
-              <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-white">{t('latest')}</h2>
-              <div className="h-[2px] flex-1 bg-gradient-to-r from-primary to-transparent opacity-20 hidden md:block" />
-            </div>
-            <ProductCarousel products={products} />
+          <section className="space-y-16">
+            <ProductCarousel 
+              products={products} 
+              title={t('latest')} 
+              subtitle={t('newArrivals')} 
+            />
           </section>
 
           {/* All Products Grid */}
-          <section className="space-y-12">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 border-l-4 border-primary/40 pl-8">
-              <div className="space-y-2">
-                <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-white">{t('collection')}</h2>
-              </div>
-              <div className="h-[2px] flex-1 bg-gradient-to-r from-primary/40 to-transparent opacity-10 hidden md:block" />
+          <section className="space-y-16">
+            <div className="flex flex-col md:flex-row items-baseline justify-between gap-6">
+              <h2 className="text-5xl md:text-7xl font-bold tracking-tight uppercase text-foreground">{t('collection')}</h2>
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground/20">{t('shopAll')}</span>
             </div>
             <ProductGrid />
           </section>

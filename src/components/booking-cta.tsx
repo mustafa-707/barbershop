@@ -3,51 +3,48 @@ import * as React from "react"
 import { useTranslations } from "next-intl"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { BookingDialog } from "./booking-dialog"
+import { api } from "~/trpc/react"
 
 export function BookingCta() {
   const t = useTranslations('Hero')
+  const { data: settings } = api.settings.get.useQuery()
   const { scrollY } = useScroll()
-  const y1 = useTransform(scrollY, [0, 500], [0, 200])
+  const y1 = useTransform(scrollY, [0, 500], [0, 100])
+
+  const heroImage = settings?.heroImageUrl || "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=2070&auto=format&fit=crop"
 
   return (
-    <section className="relative w-full py-32 md:py-72 overflow-hidden bg-slate-950 transition-colors duration-700">
-      {/* Parallax Background */}
+    <section className="relative w-full py-40 md:py-60 overflow-hidden bg-background">
+      {/* Background Image - Subtle & Refined */}
       <motion.div 
-        style={{ y: y1 }}
-        className="absolute inset-0 z-0 bg-[url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-30 contrast-[1.1] grayscale brightness-[0.4] hover:grayscale-0 transition-all duration-1000" 
+        style={{ y: y1, backgroundImage: `url(${heroImage})` }}
+        className="absolute inset-0 z-0 bg-cover bg-center opacity-[0.4] grayscale dark:opacity-[0.2]" 
       />
-      <div className="absolute inset-0 z-1 bg-gradient-to-b from-background/90 via-transparent to-background" />
       
-      <div className="container relative z-10 mx-auto max-w-7xl px-4 flex flex-col items-center text-center space-y-16">
+      <div className="container relative z-10 mx-auto max-w-7xl px-6 flex flex-col items-center text-center space-y-12">
         <motion.div
-           initial={{ opacity: 0, y: 60 }}
+           initial={{ opacity: 0, y: 30 }}
            whileInView={{ opacity: 1, y: 0 }}
            viewport={{ once: true }}
-           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-           className="space-y-10"
+           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+           className="space-y-8"
         >
-          <div className="inline-flex items-center gap-4">
-            <div className="h-[1px] w-12 bg-primary/40" />
-            <span className="text-primary text-xs font-black tracking-[0.5em] uppercase">
-              EST. 1990 • AMMAN
-            </span>
-            <div className="h-[1px] w-12 bg-primary/40" />
-          </div>
-          <h1 className="text-7xl md:text-[12rem] font-black tracking-tighter mb-8 text-white leading-[0.75] uppercase drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-            {t('title').split(' ').map((word, i) => (
-              <span key={i} className={i > 2 ? "text-primary drop-shadow-[0_0_40px_rgba(212,175,55,0.4)] animate-pulse-slow" : ""}>{word} </span>
-            ))}
+          <span className="text-primary text-[10px] font-black tracking-[0.6em] uppercase block">
+            {t('badge')}
+          </span>
+          <h1 className="text-6xl md:text-[8rem] font-bold tracking-tight text-foreground uppercase leading-[0.9] max-w-5xl mx-auto">
+            {t('title')}
           </h1>
-          <p className="text-xl md:text-3xl text-white/50 font-bold max-w-3xl mx-auto leading-relaxed tracking-wide uppercase">
+          <p className="text-sm md:text-lg text-foreground/40 font-medium max-w-2xl mx-auto tracking-widest uppercase">
             {t('subtitle')}
           </p>
         </motion.div>
 
         <motion.div
-           initial={{ opacity: 0, scale: 0.9 }}
-           whileInView={{ opacity: 1, scale: 1 }}
+           initial={{ opacity: 0 }}
+           whileInView={{ opacity: 1 }}
            viewport={{ once: true }}
-           transition={{ delay: 0.6, duration: 0.8, type: "spring", stiffness: 100 }}
+           transition={{ delay: 0.5, duration: 1 }}
         >
           <BookingDialog />
         </motion.div>

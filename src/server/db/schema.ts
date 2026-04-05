@@ -21,6 +21,7 @@ export const users = createTable("user", (t) => ({
   email: t.varchar("email", { length: 255 }),
   emailVerified: t.timestamp("emailVerified", { mode: "date", withTimezone: true }),
   image: t.varchar("image", { length: 255 }),
+  hashedPassword: t.varchar("hashedPassword", { length: 255 }),
   role: roleEnum("role").default("USER").notNull(),
   createdAt: t.timestamp("createdAt", { withTimezone: true }).defaultNow().notNull(),
   updatedAt: t.timestamp("updatedAt", { withTimezone: true }).defaultNow().notNull(),
@@ -72,11 +73,37 @@ export const products = createTable("product", (t) => ({
   updatedAt: t.timestamp("updatedAt", { withTimezone: true }).defaultNow().notNull(),
 }));
 
+export const services = createTable("service", (t) => ({
+  id: uuid("id").defaultRandom().primaryKey(),
+  nameEn: t.varchar("nameEn", { length: 255 }).notNull(),
+  nameAr: t.varchar("nameAr", { length: 255 }).notNull(),
+  descriptionEn: t.text("descriptionEn"),
+  descriptionAr: t.text("descriptionAr"),
+  price: t.varchar("price", { length: 255 }).notNull(),
+  duration: t.integer("duration").default(30), // minutes
+  imageUrl: t.varchar("imageUrl", { length: 512 }),
+  createdAt: t.timestamp("createdAt", { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: t.timestamp("updatedAt", { withTimezone: true }).defaultNow().notNull(),
+}));
+
+export const barbers = createTable("barber", (t) => ({
+  id: uuid("id").defaultRandom().primaryKey(),
+  nameEn: t.varchar("nameEn", { length: 255 }).notNull(),
+  nameAr: t.varchar("nameAr", { length: 255 }).notNull(),
+  imageUrl: t.varchar("imageUrl", { length: 512 }),
+  descriptionEn: t.text("descriptionEn"),
+  descriptionAr: t.text("descriptionAr"),
+  createdAt: t.timestamp("createdAt", { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: t.timestamp("updatedAt", { withTimezone: true }).defaultNow().notNull(),
+}));
+
 export const bookings = createTable("booking", (t) => ({
   id: uuid("id").defaultRandom().primaryKey(),
   userId: t.varchar("userId", { length: 255 }).references(() => users.id, { onDelete: "set null" }),
   guestName: t.varchar("guestName", { length: 255 }),
   guestPhone: t.varchar("guestPhone", { length: 255 }),
+  serviceId: uuid("serviceId").references(() => services.id, { onDelete: "set null" }),
+  barberId: uuid("barberId").references(() => barbers.id, { onDelete: "set null" }),
   bookingTime: t.timestamp("bookingTime", { withTimezone: true }).notNull(),
   status: bookingStatusEnum("status").default("PENDING").notNull(),
   createdAt: t.timestamp("createdAt", { withTimezone: true }).defaultNow().notNull(),
@@ -109,10 +136,29 @@ export const settings = createTable("setting", (t) => ({
   mapUrl: t.text("mapUrl"),
   logoUrl: t.varchar("logoUrl", { length: 512 }),
   faviconUrl: t.varchar("faviconUrl", { length: 512 }),
+  heroImageUrl: t.varchar("heroImageUrl", { length: 512 }),
+  aboutImageUrl: t.varchar("aboutImageUrl", { length: 512 }),
+  fontFamily: t.varchar("fontFamily", { length: 255 }).default("Inter"),
   descriptionEn: t.text("descriptionEn"),
   descriptionAr: t.text("descriptionAr"),
+  primaryColor: t.varchar("primaryColor", { length: 255 }).default("#C5A059"),
+  secondaryColor: t.varchar("secondaryColor", { length: 255 }).default("#1e293b"),
+  backgroundColor: t.varchar("backgroundColor", { length: 255 }).default("#020617"),
+  textColor: t.varchar("textColor", { length: 255 }).default("#f8fafc"),
+  radius: t.varchar("radius", { length: 255 }).default("0.5rem"),
   updatedAt: t.timestamp("updatedAt", { withTimezone: true }).defaultNow().notNull(),
 }));
+
+export const translations = createTable("translation", (t) => ({
+  id: uuid("id").defaultRandom().primaryKey(),
+  key: t.varchar("key", { length: 255 }).notNull(),
+  en: t.text("en"),
+  ar: t.text("ar"),
+  category: t.varchar("category", { length: 255 }),
+  updatedAt: t.timestamp("updatedAt", { withTimezone: true }).defaultNow().notNull(),
+}), (table) => [
+  index("translation_key_idx").on(table.key)
+]);
 
 export const usersRelations = relations(users, ({ many }) => ({
   accounts: many(accounts),
@@ -133,4 +179,7 @@ export const orderItemsRelations = relations(orderItems, ({ one }) => ({
 
 export const bookingsRelations = relations(bookings, ({ one }) => ({
   user: one(users, { fields: [bookings.userId], references: [users.id] }),
+  service: one(services, { fields: [bookings.serviceId], references: [services.id] }),
+  barber: one(barbers, { fields: [bookings.barberId], references: [barbers.id] }),
 }));
+

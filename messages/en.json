@@ -12,7 +12,9 @@
     "search": "Search...",
     "yes": "Yes",
     "no": "No",
-    "actions": "Actions"
+    "actions": "Actions",
+    "minutes": "mins",
+    "duration": "Duration"
   },
   "Nav": {
     "login": "Login",
@@ -23,7 +25,11 @@
     "logout": "Logout",
     "language": "Language",
     "theme": "Toggle Theme",
-    "contact": "Contact Us"
+    "contact": "Contact Us",
+    "themeDark": "DARK",
+    "themeLight": "LIGHT",
+    "langEn": "EN",
+    "langAr": "AR"
   },
   "Booking": {
     "cta": "Book Appointment",
@@ -34,11 +40,15 @@
     "dateTime": "Requested Date & Time",
     "submit": "Confirm Booking Request",
     "successTitle": "Booking Received!",
-    "successDescription": "We've received your booking request. We'll contact you soon."
+    "successDescription": "We've received your booking request. We'll contact you soon.",
+    "selectService": "Select Service",
+    "selectBarber": "Select Barber"
   },
   "Shop": {
     "latest": "Latest Products",
+    "newArrivals": "NEW ARRIVALS",
     "collection": "Our Collection",
+    "shopAll": "SHOP ALL",
     "new": "NEW",
     "addToCart": "Add to Cart",
     "cart": "Shopping Cart",
@@ -70,6 +80,7 @@
     "noProducts": "No products match your search."
   },
   "Hero": {
+    "badge": "EST. 1990 — LUXURY GROOMING",
     "title": "Premium Grooming for the Modern Gentleman",
     "subtitle": "Experience our legacy of exceptional haircuts, styling, and grooming services."
   },
@@ -95,6 +106,7 @@
     "ordersDesc": "View and manage product orders.",
     "settingsTitle": "Settings",
     "settingsDesc": "Manage shop information and appearance.",
+    "settingsUpdated": "Settings updated successfully",
     "nameEnAr": "Name (EN/AR)",
     "quantity": "Quantity",
     "isNew": "New",
@@ -105,6 +117,8 @@
     "status": "Status",
     "phone": "Phone",
     "fullName": "Full Name",
+    "service": "Service",
+    "barber": "Barber",
     "brandSettings": "Brand Settings",
     "contactSettings": "Contact Settings",
     "siteNameEn": "Site Name (English)",
@@ -115,11 +129,73 @@
     "contactEmail": "Contact Email",
     "mapUrl": "Map URL",
     "logoUrl": "Logo URL",
+    "themeMedia": "Theme & Media",
+    "heroBackground": "Hero Background URL",
+    "aboutImage": "About Section Image",
+    "primaryColor": "Primary Color",
+    "secondaryColor": "Secondary Color",
+    "backgroundColor": "Background Color",
+    "textColor": "Text Color",
+    "cornerRadius": "Corner Radius",
+    "fontFamily": "Font Family",
+    "faviconUrl": "Favicon URL",
+    "openingHoursEn": "Opening Hours (English)",
+    "openingHoursAr": "Opening Hours (Arabic)",
+    "adminSecurity": "Admin Security",
+    "currentPassword": "Current Password (optional if not set)",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm New Password",
+    "changePassword": "Change Password",
+    "passwordUpdated": "Admin password updated successfully",
+    "createAdmin": "Create New Admin",
+    "adminName": "Full Name",
+    "adminEmail": "Email Address",
+    "adminPhone": "Phone Number",
+    "initialPassword": "Initial Password",
+    "createAdminAccount": "Create Admin Account",
+    "adminCreatedSuccess": "New admin created successfully",
+    "manageTranslations": "Manage All Database Translations",
+    "userManagement": "User Management",
+    "userManagementDesc": "Manage registered customers and administrators.",
+    "usersTitle": "Users",
+    "roleAdmin": "Admin",
+    "roleUser": "User",
+    "user": "User",
+    "email": "Email",
+    "role": "Role",
+    "noUsers": "No users found.",
+    "active": "Active",
     "statusMap": {
       "PENDING": "Pending",
       "CONFIRMED": "Confirmed",
       "COMPLETED": "Completed",
-      "CANCELLED": "Cancelled"
-    }
+      "CANCELLED": "Cancelled",
+      "PROCESSING": "Processing",
+      "READY": "Ready"
+    },
+    "servicesTitle": "Services",
+    "servicesDesc": "Manage your service offerings.",
+    "barbersTitle": "Barbers",
+    "barbersDesc": "Manage your team members.",
+    "price": "Price",
+    "deleteConfirm": "Are you sure you want to delete this?",
+    "addService": "Add New Service",
+    "addBarber": "Add New Barber",
+    "serviceAddedSuccess": "Service added successfully",
+    "serviceUpdatedSuccess": "Service updated successfully",
+    "serviceDeletedSuccess": "Service deleted successfully",
+    "barberAddedSuccess": "Barber added successfully",
+    "barberUpdatedSuccess": "Barber updated successfully",
+    "barberDeletedSuccess": "Barber deleted successfully"
+  },
+  "Footer": {
+    "description": "REDEFINING THE MODERN GENTLEMAN THROUGH TRADITIONAL CRAFT AND CONTEMPORARY STYLE.",
+    "explore": "EXPLORE",
+    "connect": "CONNECT",
+    "visit": "VISIT",
+    "contact": "Contact",
+    "rights": "ALL RIGHTS RESERVED",
+    "privacy": "Privacy",
+    "terms": "Terms"
   }
 }

@@ -12,7 +12,9 @@
     "search": "بحث...",
     "yes": "نعم",
     "no": "لا",
-    "actions": "إجراءات"
+    "actions": "إجراءات",
+    "minutes": "دقيقة",
+    "duration": "المدة"
   },
   "Nav": {
     "login": "تسجيل الدخول",
@@ -23,7 +25,11 @@
     "logout": "تسجيل الخروج",
     "language": "اللغة",
     "theme": "تغيير المظهر",
-    "contact": "تواصل معنا"
+    "contact": "تواصل معنا",
+    "themeDark": "داكن",
+    "themeLight": "فاتح",
+    "langEn": "EN",
+    "langAr": "AR"
   },
   "Booking": {
     "cta": "احجز موعداً",
@@ -34,11 +40,15 @@
     "dateTime": "التاريخ والوقت المطلوب",
     "submit": "تأكيد طلب الحجز",
     "successTitle": "تم استلام الحجز!",
-    "successDescription": "لقد استلمنا طلب الحجز الخاص بك. سنتصل بك قريباً."
+    "successDescription": "لقد استلمنا طلب الحجز الخاص بك. سنتصل بك قريباً.",
+    "selectService": "اختر الخدمة",
+    "selectBarber": "اختر الحلاق"
   },
   "Shop": {
     "latest": "أحدث المنتجات",
+    "newArrivals": "وصل حديثاً",
     "collection": "مجموعتنا",
+    "shopAll": "تسوق الكل",
     "new": "جديد",
     "addToCart": "أضف إلى السلة",
     "cart": "سلة التسوق",
@@ -70,6 +80,7 @@
     "noProducts": "لا توجد منتجات تطابق بحثك."
   },
   "Hero": {
+    "badge": "تأسس عام 1990 - عناية فاخرة",
     "title": "حلاقة ممتازة للرجل العصري",
     "subtitle": "استمتع بتجربة إرثنا من قصات الشعر المتميزة والتصفيف وخدمات العناية."
   },
@@ -95,6 +106,7 @@
     "ordersDesc": "عرض وإدارة طلبات المنتجات.",
     "settingsTitle": "الإعدادات",
     "settingsDesc": "إدارة معلومات المتجر والمظهر.",
+    "settingsUpdated": "تم تحديث الإعدادات بنجاح",
     "nameEnAr": "الاسم (إنجليزي/عربي)",
     "quantity": "الكمية",
     "isNew": "جديد",
@@ -105,6 +117,8 @@
     "status": "الحالة",
     "phone": "الهاتف",
     "fullName": "الاسم الكامل",
+    "service": "الخدمة",
+    "barber": "الحلاق",
     "brandSettings": "إعدادات العلامة التجارية",
     "contactSettings": "إعدادات التواصل",
     "siteNameEn": "اسم الموقع (انجليزي)",
@@ -115,11 +129,73 @@
     "contactEmail": "البريد الإلكتروني للتواصل",
     "mapUrl": "رابط الخريطة",
     "logoUrl": "رابط الشعار",
+    "themeMedia": "المظهر والوسائط",
+    "heroBackground": "صورة الخلفية الرئيسية",
+    "aboutImage": "صورة قسم من نحن",
+    "primaryColor": "اللون الأساسي",
+    "secondaryColor": "اللون الثانوي",
+    "backgroundColor": "لون الخلفية",
+    "textColor": "لون النص",
+    "cornerRadius": "زوايا مستديرة",
+    "fontFamily": "نوع الخط",
+    "faviconUrl": "رابط الأيقونة",
+    "openingHoursEn": "ساعات العمل (انجليزي)",
+    "openingHoursAr": "ساعات العمل (عربي)",
+    "adminSecurity": "أمان المسؤول",
+    "currentPassword": "كلمة المرور الحالية (اختياري إذا لم تُعيّن)",
+    "newPassword": "كلمة المرور الجديدة",
+    "confirmPassword": "تأكيد كلمة المرور الجديدة",
+    "changePassword": "تغيير كلمة المرور",
+    "passwordUpdated": "تم تحديث كلمة مرور المسؤول بنجاح",
+    "createAdmin": "إنشاء مسؤول جديد",
+    "adminName": "الاسم الكامل",
+    "adminEmail": "البريد الإلكتروني",
+    "adminPhone": "رقم الهاتف",
+    "initialPassword": "كلمة المرور الأولية",
+    "createAdminAccount": "إنشاء حساب مسؤول",
+    "adminCreatedSuccess": "تم إنشاء المسؤول الجديد بنجاح",
+    "manageTranslations": "إدارة جميع ترجمات قاعدة البيانات",
+    "userManagement": "إدارة المستخدمين",
+    "userManagementDesc": "إدارة العملاء المسجلين والمسؤولين.",
+    "usersTitle": "المستخدمون",
+    "roleAdmin": "مشرف",
+    "roleUser": "مستخدم",
+    "user": "المستخدم",
+    "email": "البريد الإلكتروني",
+    "role": "الدور",
+    "noUsers": "لم يتم العثور على مستخدمين.",
+    "active": "نشط",
     "statusMap": {
       "PENDING": "قيد الانتظار",
       "CONFIRMED": "مؤكد",
       "COMPLETED": "مكتمل",
-      "CANCELLED": "ملغى"
-    }
+      "CANCELLED": "ملغى",
+      "PROCESSING": "قيد المعالجة",
+      "READY": "جاهز"
+    },
+    "servicesTitle": "الخدمات",
+    "servicesDesc": "إدارة عروض الخدمات.",
+    "barbersTitle": "الحلاقون",
+    "barbersDesc": "إدارة أعضاء الفريق.",
+    "price": "السعر",
+    "deleteConfirm": "هل أنت متأكد أنك تريد الحذف؟",
+    "addService": "إضافة خدمة جديدة",
+    "addBarber": "إضافة حلاق جديد",
+    "serviceAddedSuccess": "تم إضافة الخدمة بنجاح",
+    "serviceUpdatedSuccess": "تم تحديث الخدمة بنجاح",
+    "serviceDeletedSuccess": "تم حذف الخدمة بنجاح",
+    "barberAddedSuccess": "تم إضافة الحلاق بنجاح",
+    "barberUpdatedSuccess": "تم تحديث الحلاق بنجاح",
+    "barberDeletedSuccess": "تم حذف الحلاق بنجاح"
+  },
+  "Footer": {
+    "description": "نعيد تعريف الرجل العصري من خلال الحرفة التقليدية والأناقة المعاصرة.",
+    "explore": "استكشف",
+    "connect": "تواصل",
+    "visit": "زيارة",
+    "contact": "تواصل",
+    "rights": "جميع الحقوق محفوظة",
+    "privacy": "الخصوصية",
+    "terms": "الشروط"
   }
 }

@@ -9,7 +9,7 @@ import {
   TableHeader, 
   TableRow 
 } from "~/components/ui/table";
-import { Calendar } from "lucide-react";
+import { Calendar, Scissors, User as UserIcon } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { BookingActions } from "./_components/booking-actions";
 
@@ -20,7 +20,13 @@ export default async function AdminBookingsPage({ params }: { params: Promise<{ 
   
   const allBookings = await db.query.bookings.findMany({
     orderBy: [desc(bookings.createdAt)],
+    with: {
+      service: true,
+      barber: true,
+    }
   });
+
+  const isAr = locale === "ar";
 
   return (
     <div className="space-y-10">
@@ -37,6 +43,8 @@ export default async function AdminBookingsPage({ params }: { params: Promise<{ 
             <TableRow className="hover:bg-transparent border-white/10 h-16">
               <TableHead className="px-8">{t('fullName')}</TableHead>
               <TableHead>{t('phone')}</TableHead>
+              <TableHead>{t('service')}</TableHead>
+              <TableHead>{t('barber')}</TableHead>
               <TableHead>{t('date')}</TableHead>
               <TableHead>{t('status')}</TableHead>
               <TableHead className="text-right px-8">{common('actions')}</TableHead>
@@ -47,6 +55,26 @@ export default async function AdminBookingsPage({ params }: { params: Promise<{ 
               <TableRow key={booking.id} className="hover:bg-white/5 border-white/5 h-20 transition-colors">
                 <TableCell className="px-8 font-bold">{booking.guestName}</TableCell>
                 <TableCell className="font-medium text-muted-foreground">{booking.guestPhone}</TableCell>
+                <TableCell>
+                  {booking.service ? (
+                    <div className="flex items-center gap-2">
+                       <Scissors className="h-4 w-4 text-primary/60" />
+                       <span className="font-bold">{isAr ? booking.service.nameAr : booking.service.nameEn}</span>
+                    </div>
+                  ) : (
+                    <span className="text-muted-foreground/40 italic">-</span>
+                  )}
+                </TableCell>
+                <TableCell>
+                  {booking.barber ? (
+                    <div className="flex items-center gap-2">
+                       <UserIcon className="h-4 w-4 text-primary/60" />
+                       <span className="font-bold">{isAr ? booking.barber.nameAr : booking.barber.nameEn}</span>
+                    </div>
+                  ) : (
+                    <span className="text-muted-foreground/40 italic">-</span>
+                  )}
+                </TableCell>
                 <TableCell className="font-medium">
                   {new Intl.DateTimeFormat(locale, { dateStyle: 'medium', timeStyle: 'short' }).format(booking.bookingTime)}
                 </TableCell>
@@ -63,7 +91,7 @@ export default async function AdminBookingsPage({ params }: { params: Promise<{ 
             ))}
             {allBookings.length === 0 && (
               <TableRow>
-                <TableCell colSpan={5} className="text-center py-24 text-muted-foreground space-y-4">
+                <TableCell colSpan={7} className="text-center py-24 text-muted-foreground space-y-4">
                    <Calendar className="h-16 w-16 mx-auto opacity-10" />
                    <p className="text-xl font-bold">{t('noBookings')}</p>
                 </TableCell>

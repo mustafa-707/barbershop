@@ -45,7 +45,7 @@ export default async function AdminProductsPage({ params }: { params: Promise<{ 
           <TableHeader className="bg-white/5">
             <TableRow className="hover:bg-transparent border-white/10 h-16">
               <TableHead className="px-8 font-black text-xs uppercase tracking-widest">{t('nameEnAr')}</TableHead>
-              <TableHead className="font-black text-xs uppercase tracking-widest">Price</TableHead>
+              <TableHead className="font-black text-xs uppercase tracking-widest">{t('price')}</TableHead>
               <TableHead className="font-black text-xs uppercase tracking-widest">{t('quantity')}</TableHead>
               <TableHead className="font-black text-xs uppercase tracking-widest">{t('isNew')}</TableHead>
               <TableHead className="text-right px-8 font-black text-xs uppercase tracking-widest">{common('actions')}</TableHead>
@@ -77,7 +77,7 @@ export default async function AdminProductsPage({ params }: { params: Promise<{ 
             ))}
             {allProducts.length === 0 && (
               <TableRow>
-                <TableCell colSpan={4} className="text-center py-24 text-muted-foreground space-y-4">
+                <TableCell colSpan={5} className="text-center py-24 text-muted-foreground space-y-4">
                   <ShoppingBag className="h-16 w-16 mx-auto opacity-10" />
                   <p className="text-xl font-bold">{t('noProducts')}</p>
                 </TableCell>

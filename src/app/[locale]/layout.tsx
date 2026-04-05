@@ -2,9 +2,10 @@ import "~/styles/globals.css";
 import { db } from "~/server/db";
 
 import { type Metadata, type Viewport } from "next";
-import { Inter, Cairo } from "next/font/google";
+import { Inter, Cairo, Outfit, Playfair_Display, Roboto } from "next/font/google";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
+
 import { ThemeProvider } from "~/components/theme-provider";
 import { Header } from "~/components/header";
 import { Footer } from "~/components/footer";
@@ -13,16 +14,32 @@ import { AuthProvider } from "~/components/auth-provider";
 
 import { TRPCReactProvider } from "~/trpc/react";
 
-export const metadata: Metadata = {
-  title: "BarberShop Amman | Premium Grooming",
-  description: "Experience excellence in grooming at BarberShop Amman. Book your appointment now.",
-  manifest: "/manifest.webmanifest",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
-  appleWebApp: {
-    title: "BarberShop",
-    statusBarStyle: "black-translucent",
-  },
-};
+// Dynamic metadata based on DB settings
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const settings = await db.query.settings.findFirst();
+  
+  const siteName = locale === 'ar'
+    ? (settings?.siteNameAr ?? "صالون الحلاقة")
+    : (settings?.siteNameEn ?? "BarberShop");
+  
+  const description = locale === 'ar'
+    ? (settings?.descriptionAr ?? "تجربة متميزة في العناية الشخصية")
+    : (settings?.descriptionEn ?? "Experience excellence in grooming. Book your appointment now.");
+
+  const faviconUrl = settings?.faviconUrl || "/favicon.ico";
+
+  return {
+    title: `${siteName} | Premium Grooming`,
+    description,
+    manifest: "/manifest.webmanifest",
+    icons: [{ rel: "icon", url: faviconUrl }],
+    appleWebApp: {
+      title: siteName,
+      statusBarStyle: "black-translucent",
+    },
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: "#d4af37",
@@ -32,15 +49,11 @@ export const viewport: Viewport = {
   userScalable: false,
 };
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
-
-const cairo = Cairo({
-  subsets: ["arabic"],
-  variable: "--font-cairo",
-});
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const cairo = Cairo({ subsets: ["arabic"], variable: "--font-cairo" });
+const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
+const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
+const roboto = Roboto({ weight: ["400", "700", "900"], subsets: ["latin"], variable: "--font-roboto" });
 
 export default async function RootLayout({
   children,
@@ -50,9 +63,32 @@ export default async function RootLayout({
   const messages = await getMessages();
   const settings = await db.query.settings.findFirst();
 
+  const fontMap: Record<string, string> = {
+    'Inter': 'var(--font-inter)',
+    'Outfit': 'var(--font-outfit)',
+    'Playfair Display': 'var(--font-playfair)',
+    'Roboto': 'var(--font-roboto)',
+  };
+
+  const selectedFont = settings?.fontFamily ? fontMap[settings.fontFamily] ?? 'var(--font-inter)' : 'var(--font-inter)';
+
+  const themeVars = {
+    '--primary': settings?.primaryColor ?? '#C5A059',
+    '--secondary': settings?.secondaryColor ?? '#1e293b',
+    '--background': settings?.backgroundColor ?? '#020617',
+    '--foreground': settings?.textColor ?? '#f8fafc',
+    '--radius': settings?.radius ?? '2.5rem',
+    '--font-family': locale === 'ar' ? 'var(--font-cairo)' : selectedFont,
+  } as React.CSSProperties;
+
   return (
-    <html suppressHydrationWarning lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} className={`${inter.variable} ${cairo.variable}`}>
-      <body className="antialiased">
+    <html 
+      suppressHydrationWarning 
+      lang={locale} 
+      dir={locale === 'ar' ? 'rtl' : 'ltr'} 
+      className={`${inter.variable} ${cairo.variable} ${outfit.variable} ${playfair.variable} ${roboto.variable}`}
+    >
+      <body className="antialiased font-[family-name:var(--font-family)]" style={themeVars}>
         <NextIntlClientProvider messages={messages} locale={locale}>
           <ThemeProvider
             attribute="class"

@@ -16,33 +16,27 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full glass-header transition-all duration-500">
       <div className="container flex h-16 items-center justify-between px-6 mx-auto max-w-7xl">
         <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center gap-4 group">
             <motion.div
-              whileHover={{ rotate: 15, scale: 1.1 }}
-              className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-primary-foreground shadow-gold"
+              whileHover={{ rotate: 5, scale: 1.02 }}
+              className="w-12 h-12 bg-primary rounded-none flex items-center justify-center text-primary-foreground"
             >
               <Scissors className="w-6 h-6" />
             </motion.div>
-            <motion.span
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              whileHover={{ scale: 1.05 }}
-              className="text-3xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-foreground via-foreground to-primary/80 transition-all duration-300"
-            >
+            <span className="text-2xl font-bold uppercase tracking-[0.2em] text-foreground">
               BarberShop
-            </motion.span>
+            </span>
           </Link>
-          <nav className="hidden lg:flex items-center gap-8">
-            <Link href="/" className="text-sm font-bold uppercase tracking-widest text-foreground/70 hover:text-primary transition-colors">{t('home')}</Link>
-            <Link href="/#products" className="text-sm font-bold uppercase tracking-widest text-foreground/70 hover:text-primary transition-colors">{t('shop')}</Link>
-            <Link href="/contact" className="text-sm font-bold uppercase tracking-widest text-foreground/70 hover:text-primary transition-colors">{t('contact')}</Link>
+          <nav className="hidden lg:flex items-center gap-10">
+            <Link href="/" className="text-[10px] font-black uppercase tracking-[0.3em] text-foreground/40 hover:text-primary transition-colors">{t('home')}</Link>
+            <Link href="/#products" className="text-[10px] font-black uppercase tracking-[0.3em] text-foreground/40 hover:text-primary transition-colors">{t('shop')}</Link>
+            <Link href="/contact" className="text-[10px] font-black uppercase tracking-[0.3em] text-foreground/40 hover:text-primary transition-colors">{t('contact')}</Link>
           </nav>
         </div>
         <div className="flex items-center gap-4">
           <CartSheet />
           <UserNav />
-          <div className="h-8 w-[1px] bg-foreground/10 mx-2 hidden sm:block" />
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-6">
             <LanguageSwitcher />
             <ModeToggle />
           </div>
