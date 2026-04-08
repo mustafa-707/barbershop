@@ -86,7 +86,7 @@ export default async function AdminDashboardPage({ params }: { params: Promise<{
       <div className="grid md:grid-cols-2 gap-6">
         <div className="glass dark:glass-dark p-6 rounded-3xl border border-white/10">
           <h2 className="text-xl font-bold mb-4">{t('quickActions')}</h2>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Button variant="outline" className="h-24 flex flex-col gap-2 rounded-2xl" asChild>
               <Link href="/admin/products/new">
                 <Plus className="h-6 w-6" />

@@ -38,7 +38,7 @@ export function ProductCard({ product }: { product: Product }) {
               src={product.imageUrl} 
               alt={product.nameEn} 
               fill 
-              className="object-cover transition-transform duration-1000 ease-out group-hover/card:scale-105 opacity-80 group-hover/card:opacity-100 grayscale hover:grayscale-0" 
+              className="object-cover transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:scale-110 opacity-80 group-hover/card:opacity-100 grayscale hover:grayscale-0" 
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
@@ -53,8 +53,8 @@ export function ProductCard({ product }: { product: Product }) {
              </span>
           </div>
 
-          {/* Quick Action Overlay */}
-          <div className="absolute inset-0 z-10 bg-background/20 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+          {/* Desktop Hover Action Overlay */}
+          <div className="absolute inset-0 z-10 bg-background/20 opacity-0 hidden md:flex group-hover/card:opacity-100 transition-opacity duration-500 items-center justify-center">
              <Button 
                 variant="outline"
                 className="rounded-none border-foreground text-foreground hover:bg-foreground hover:text-background h-12 px-8 text-[10px] font-black uppercase tracking-[0.3em] transition-all"
@@ -68,6 +68,26 @@ export function ProductCard({ product }: { product: Product }) {
                 }}
             >
                 {t('addToCart')}
+            </Button>
+          </div>
+
+          {/* Mobile Quick Action */}
+          <div className="absolute top-4 right-4 z-20 md:hidden block">
+             <Button 
+                variant="outline"
+                size="icon"
+                className="rounded-full bg-background/80 backdrop-blur border-foreground/20 text-foreground hover:bg-foreground hover:text-background h-11 w-11 shadow-lg"
+                onClick={(e) => {
+                  e.preventDefault();
+                  addItem({
+                    productId: product.id,
+                    name: product.nameEn,
+                    price: product.price
+                  })
+                }}
+            >
+               <ShoppingBag className="w-5 h-5" />
+               <span className="sr-only">{t('addToCart')}</span>
             </Button>
           </div>
         </div>

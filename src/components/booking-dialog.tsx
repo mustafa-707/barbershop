@@ -76,8 +76,14 @@ export function BookingDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="lg" className="rounded-none h-16 px-12 text-[10px] font-black uppercase tracking-[0.4em] bg-primary text-primary-foreground hover:opacity-90 transition-opacity">
-          {t('cta')}
+        <Button 
+          asChild
+          size="lg" 
+          className="rounded-none h-16 px-12 text-[10px] font-black uppercase tracking-[0.4em] bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+        >
+          <motion.button whileTap={{ scale: 0.98 }}>
+            {t('cta')}
+          </motion.button>
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-2xl p-0 border-none bg-background overflow-y-auto max-h-[90vh] rounded-none shadow-2xl custom-scrollbar">
@@ -101,7 +107,7 @@ export function BookingDialog() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="p-8 md:p-12 space-y-10"
+            className="p-4 md:p-12 space-y-6 md:space-y-10"
           >
             <DialogHeader className={isRtl ? "text-right" : "text-left"}>
               <DialogTitle className="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none">{t('title')}</DialogTitle>
@@ -110,8 +116,8 @@ export function BookingDialog() {
               </DialogDescription>
             </DialogHeader>
 
-            <form onSubmit={handleSubmit} className="space-y-10">
-              <div className="grid gap-10">
+            <form onSubmit={handleSubmit} className="space-y-6 md:space-y-10">
+              <div className="grid gap-4 md:gap-10">
                 {/* Visual Service Selection */}
                 {services && services.length > 0 && (
                   <div className="space-y-6">
@@ -192,15 +198,14 @@ export function BookingDialog() {
                   </div>
                 )}
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                   <div className="space-y-4">
                     <Label htmlFor="name" className={`text-[10px] font-black uppercase tracking-[0.2em] text-foreground/30 block ${isRtl ? 'text-right' : 'text-left'}`}>{t('fullName')}</Label>
                     <Input 
                       id="name" 
                       value={name} 
                       onChange={e => setName(e.target.value)} 
-                      placeholder="E.G. ABDULLAH" 
-                      className={`border-none bg-foreground/[0.03] h-16 rounded-none text-base px-8 focus:ring-1 focus:ring-primary/20 focus:bg-background transition-all font-medium ${isRtl ? 'text-right' : 'text-left'}`} 
+                      placeholder="E.G. ABDULLAH"                      className={`border-none bg-foreground/[0.03] h-16 rounded-none text-base px-4 md:px-8 focus:ring-1 focus:ring-primary/20 focus:bg-background transition-all font-medium ${isRtl ? 'text-right' : 'text-left'}`} 
                       dir={isRtl ? 'rtl' : 'ltr'}
                     />
                   </div>
@@ -212,12 +217,12 @@ export function BookingDialog() {
                       onChange={e => setPhone(e.target.value)} 
                       placeholder="+962 ..." 
                       required 
-                      className={`border-none bg-foreground/[0.03] h-16 rounded-none text-base px-8 focus:ring-1 focus:ring-primary/20 focus:bg-background transition-all font-medium ${isRtl ? 'text-right' : 'text-left'}`} 
+                      className={`border-none bg-foreground/[0.03] h-16 rounded-none text-base px-4 md:px-8 focus:ring-1 focus:ring-primary/20 focus:bg-background transition-all font-medium ${isRtl ? 'text-right' : 'text-left'}`} 
                       dir="ltr"
                     />
                   </div>
                 </div>
-
+ 
                 <div className="space-y-4">
                   <Label htmlFor="datetime" className={`text-[10px] font-black uppercase tracking-[0.2em] text-foreground/30 block ${isRtl ? 'text-right' : 'text-left'}`}>{t('dateTime')}</Label>
                   <Input 
@@ -226,22 +231,25 @@ export function BookingDialog() {
                     value={date} 
                     onChange={e => setDate(e.target.value)} 
                     required 
-                    className={`border-none bg-foreground/[0.03] h-16 rounded-none text-base px-8 focus:ring-1 focus:ring-primary/20 focus:bg-background transition-all font-medium ${isRtl ? 'text-right' : 'text-left'}`} 
+                    className={`border-none bg-foreground/[0.03] h-16 rounded-none text-base px-4 md:px-8 focus:ring-1 focus:ring-primary/20 focus:bg-background transition-all font-medium ${isRtl ? 'text-right' : 'text-left'}`} 
                   />
                 </div>
               </div>
               <div className="pt-8">
                 <Button 
+                  asChild
                   type="submit" 
                   className="w-full h-20 text-[12px] font-black uppercase tracking-[0.4em] bg-primary text-primary-foreground rounded-none hover:opacity-90 transition-opacity shadow-2xl" 
                   disabled={createBooking.isPending}
                 >
-                  {createBooking.isPending ? (
-                    <div className="flex items-center gap-3">
-                       <Loader2 className="h-5 w-5 animate-spin" />
-                       {common('requesting')}
-                    </div>
-                  ) : t('submit')}
+                  <motion.button whileTap={{ scale: 0.98 }}>
+                    {createBooking.isPending ? (
+                      <div className="flex items-center gap-3">
+                         <Loader2 className="h-5 w-5 animate-spin" />
+                         {common('requesting')}
+                      </div>
+                    ) : t('submit')}
+                  </motion.button>
                 </Button>
               </div>
             </form>

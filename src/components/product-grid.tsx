@@ -38,7 +38,7 @@ export function ProductGrid() {
               variant={activeCategory === cat ? "default" : "outline"}
               onClick={() => setActiveCategory(cat)}
               className={cn(
-                "rounded-full px-10 py-7 text-sm font-black uppercase tracking-[0.2em] transition-all duration-500",
+                "rounded-full px-6 py-4 md:px-10 md:py-7 text-xs md:text-sm font-black uppercase tracking-[0.2em] transition-all duration-500",
                 activeCategory === cat 
                   ? "bg-primary text-black shadow-[0_20px_50px_rgba(var(--primary),0.4)] scale-110" 
                   : "bg-transparent border-transparent text-foreground/50 hover:text-foreground hover:bg-foreground/10"
@@ -49,17 +49,17 @@ export function ProductGrid() {
           ))}
         </div>
         <div className="relative w-full md:w-[450px] shadow-3xl rounded-[2rem] overflow-hidden group">
-          <Search className="absolute left-8 top-1/2 -translate-y-1/2 h-7 w-7 text-primary transition-transform duration-500 group-focus-within:scale-110" />
+          <Search className="absolute left-6 md:left-8 top-1/2 -translate-y-1/2 h-5 w-5 md:h-7 md:w-7 text-primary transition-transform duration-500 group-focus-within:scale-110" />
           <Input 
             placeholder={common('search')}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-20 h-20 bg-foreground/5 border-foreground/10 rounded-[2rem] focus:ring-8 ring-primary/5 text-2xl font-black text-foreground placeholder:text-foreground/40 transition-all duration-500"
+            className="pl-16 md:pl-20 h-14 md:h-20 bg-foreground/5 border-foreground/10 rounded-full md:rounded-[2rem] focus:ring-4 md:focus:ring-8 ring-primary/5 text-lg md:text-2xl font-black text-foreground placeholder:text-foreground/40 transition-all duration-500"
           />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-12 gap-y-20">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 md:gap-x-12 gap-y-12 md:gap-y-20">
         <AnimatePresence mode="popLayout">
         {isLoading ? (
           Array.from({ length: 8 }).map((_, i) => (
@@ -78,10 +78,10 @@ export function ProductGrid() {
               <motion.div
                 key={product.id}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               >
                 <ProductCard product={product as Product} />
               </motion.div>

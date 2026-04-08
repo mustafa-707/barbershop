@@ -23,21 +23,27 @@ export function BookingCta() {
       
       <div className="container relative z-10 mx-auto max-w-7xl px-6 flex flex-col items-center text-center space-y-12">
         <motion.div
-           initial={{ opacity: 0, y: 30 }}
-           whileInView={{ opacity: 1, y: 0 }}
+           initial="hidden"
+           whileInView="visible"
            viewport={{ once: true }}
-           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+           variants={{
+             hidden: { opacity: 0 },
+             visible: {
+               opacity: 1,
+               transition: { staggerChildren: 0.2, delayChildren: 0.1 }
+             }
+           }}
            className="space-y-8"
         >
-          <span className="text-primary text-[10px] font-black tracking-[0.6em] uppercase block">
+          <motion.span variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } } }} className="text-primary text-[10px] font-black tracking-[0.6em] uppercase block">
             {t('badge')}
-          </span>
-          <h1 className="text-6xl md:text-[8rem] font-bold tracking-tight text-foreground uppercase leading-[0.9] max-w-5xl mx-auto">
+          </motion.span>
+          <motion.h1 variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } } }} className="text-5xl sm:text-6xl md:text-[8rem] font-bold tracking-tight text-foreground uppercase leading-[0.9] max-w-5xl mx-auto">
             {t('title')}
-          </h1>
-          <p className="text-sm md:text-lg text-foreground/40 font-medium max-w-2xl mx-auto tracking-widest uppercase">
+          </motion.h1>
+          <motion.p variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } } }} className="text-sm md:text-lg text-foreground/40 font-medium max-w-2xl mx-auto tracking-widest uppercase">
             {t('subtitle')}
-          </p>
+          </motion.p>
         </motion.div>
 
         <motion.div

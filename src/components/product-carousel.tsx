@@ -110,12 +110,16 @@ export function ProductCarousel({
         className={`flex gap-12 overflow-x-auto pb-24 pt-4 no-scrollbar snap-x snap-mandatory px-2 ${isMouseDown ? 'cursor-grabbing select-none' : 'cursor-grab scroll-smooth'}`}
       >
         {products.map((product, idx) => (
-          <div
+          <motion.div
             key={product?.id ?? idx}
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="flex-none w-[85vw] md:w-[450px] snap-start"
           >
             <ProductCard product={product} />
-          </div>
+          </motion.div>
         ))}
       </div>
       

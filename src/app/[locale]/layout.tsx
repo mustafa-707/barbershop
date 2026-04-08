@@ -2,7 +2,7 @@ import "~/styles/globals.css";
 import { db } from "~/server/db";
 
 import { type Metadata, type Viewport } from "next";
-import { Inter, Cairo, Outfit, Playfair_Display, Roboto } from "next/font/google";
+import { Inter, Cairo, Outfit, Playfair_Display, Roboto, Tajawal } from "next/font/google";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 
@@ -51,6 +51,7 @@ export const viewport: Viewport = {
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const cairo = Cairo({ subsets: ["arabic"], variable: "--font-cairo" });
+const tajawal = Tajawal({ weight: ["400", "700", "900"], subsets: ["arabic"], variable: "--font-tajawal" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
 const roboto = Roboto({ weight: ["400", "700", "900"], subsets: ["latin"], variable: "--font-roboto" });
@@ -78,7 +79,7 @@ export default async function RootLayout({
     '--background': settings?.backgroundColor ?? '#020617',
     '--foreground': settings?.textColor ?? '#f8fafc',
     '--radius': settings?.radius ?? '2.5rem',
-    '--font-family': locale === 'ar' ? 'var(--font-cairo)' : selectedFont,
+    '--font-family': locale === 'ar' ? 'var(--font-tajawal)' : selectedFont,
   } as React.CSSProperties;
 
   return (
@@ -86,7 +87,7 @@ export default async function RootLayout({
       suppressHydrationWarning 
       lang={locale} 
       dir={locale === 'ar' ? 'rtl' : 'ltr'} 
-      className={`${inter.variable} ${cairo.variable} ${outfit.variable} ${playfair.variable} ${roboto.variable}`}
+      className={`${inter.variable} ${cairo.variable} ${tajawal.variable} ${outfit.variable} ${playfair.variable} ${roboto.variable}`}
     >
       <body className="antialiased font-[family-name:var(--font-family)]" style={themeVars}>
         <NextIntlClientProvider messages={messages} locale={locale}>

@@ -13,7 +13,7 @@ export function Footer({ openingHoursEn, openingHoursAr, locale }: { openingHour
   return (
     <footer className="border-t border-border bg-background pt-24 pb-12 overflow-hidden relative">
       <div className="container mx-auto max-w-7xl px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row justify-between gap-20 mb-24">
+        <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-20 mb-24">
           {/* Brand */}
           <div className="space-y-10 max-w-xs">
             <Link href="/" className="flex items-center gap-4 group inline-flex">
@@ -29,19 +29,19 @@ export function Footer({ openingHoursEn, openingHoursAr, locale }: { openingHour
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-16 flex-1 max-w-3xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 md:gap-16 flex-1 max-w-3xl">
             {/* Quick Links */}
             <div className="space-y-8">
               <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground">{tFoot("explore")}</h4>
               <ul className="space-y-4">
                 <li>
-                  <Link href="/" className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/40 hover:text-primary transition-colors">{tNav("home")}</Link>
+                  <Link href="/" className="text-xs md:text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40 hover:text-primary transition-colors">{tNav("home")}</Link>
                 </li>
                 <li>
-                  <Link href="/#products" className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/40 hover:text-primary transition-colors">{tNav("shop")}</Link>
+                  <Link href="/#products" className="text-xs md:text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40 hover:text-primary transition-colors">{tNav("shop")}</Link>
                 </li>
                 <li>
-                  <Link href="/contact" className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/40 hover:text-primary transition-colors">{tFoot("contact")}</Link>
+                  <Link href="/contact" className="text-xs md:text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40 hover:text-primary transition-colors">{tFoot("contact")}</Link>
                 </li>
               </ul>
             </div>
@@ -84,8 +84,8 @@ export function Footer({ openingHoursEn, openingHoursAr, locale }: { openingHour
             &copy; {new Date().getFullYear()} BARBERSHOP. {tFoot("rights")}
           </p>
           <div className="flex gap-8">
-            <Link href="/privacy" className="text-[10px] font-bold uppercase tracking-[0.3em] text-foreground/20 hover:text-primary transition-colors">{tFoot("privacy")}</Link>
-            <Link href="/terms" className="text-[10px] font-bold uppercase tracking-[0.3em] text-foreground/20 hover:text-primary transition-colors">{tFoot("terms")}</Link>
+            <Link href="/privacy" className="text-xs font-bold uppercase tracking-[0.3em] text-foreground/20 hover:text-primary transition-colors">{tFoot("privacy")}</Link>
+            <Link href="/terms" className="text-xs font-bold uppercase tracking-[0.3em] text-foreground/20 hover:text-primary transition-colors">{tFoot("terms")}</Link>
           </div>
         </div>
       </div>

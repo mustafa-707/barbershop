@@ -32,12 +32,12 @@ export default async function AdminBookingsPage({ params }: { params: Promise<{ 
     <div className="space-y-10">
       <div className="flex items-center justify-between bg-white/5 dark:bg-black/20 p-8 rounded-[2rem] border border-white/10 glass shadow-xl">
         <div>
-          <h1 className="text-4xl font-black tracking-tight">{t('bookingsTitle')}</h1>
+          <h1 className="text-3xl md:text-4xl font-black tracking-tight">{t('bookingsTitle')}</h1>
           <p className="text-muted-foreground text-lg">{t('bookingsDesc')}</p>
         </div>
       </div>
 
-      <div className="border border-white/10 rounded-[2rem] bg-background/50 overflow-hidden shadow-2xl glass">
+      <div className="border border-white/10 rounded-[2rem] bg-background/50 overflow-x-auto shadow-2xl glass">
         <Table>
           <TableHeader className="bg-white/5 text-xs uppercase tracking-widest font-black">
             <TableRow className="hover:bg-transparent border-white/10 h-16">

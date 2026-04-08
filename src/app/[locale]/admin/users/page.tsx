@@ -26,7 +26,7 @@ export default async function AdminUsersPage({ params }: { params: Promise<{ loc
     <div className="space-y-12">
       <div className="flex items-center justify-between bg-white/5 dark:bg-black/20 p-8 rounded-[2rem] border border-white/10 glass shadow-xl">
         <div>
-          <h1 className="text-4xl font-black tracking-tight">{t('userManagement')}</h1>
+          <h1 className="text-3xl md:text-4xl font-black tracking-tight">{t('userManagement')}</h1>
           <p className="text-muted-foreground text-lg">{t('userManagementDesc')}</p>
         </div>
       </div>
@@ -34,7 +34,7 @@ export default async function AdminUsersPage({ params }: { params: Promise<{ loc
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-10">
         {/* User Table - Left Side */}
         <div className="xl:col-span-2 space-y-6">
-          <div className="border border-white/10 rounded-[2.5rem] bg-background/50 overflow-hidden shadow-2xl glass">
+          <div className="border border-white/10 rounded-[2.5rem] bg-background/50 overflow-x-auto shadow-2xl glass">
             <Table>
               <TableHeader className="bg-white/5 text-xs uppercase tracking-widest font-black">
                 <TableRow className="hover:bg-transparent border-white/10 h-16">

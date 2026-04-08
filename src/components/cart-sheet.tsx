@@ -105,16 +105,16 @@ export function CartSheet() {
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="flex items-center bg-black/5 dark:bg-white/5 rounded-full px-2 py-1 border border-white/5">
-                      <Button variant="outline" size="icon" className="h-8 w-8 rounded-full border-white/10 bg-white/5 text-primary" onClick={() => updateQuantity(item.productId, item.quantity - 1)}>
-                        <Minus className="h-3 w-3" />
+                      <Button variant="outline" size="icon" className="h-11 w-11 rounded-full border-white/10 bg-white/5 text-primary" onClick={() => updateQuantity(item.productId, item.quantity - 1)}>
+                        <Minus className="h-4 w-4" />
                       </Button>
-                      <span className="text-sm font-bold w-4 text-center text-white">{item.quantity}</span>
-                      <Button variant="outline" size="icon" className="h-8 w-8 rounded-full border-white/10 bg-white/5 text-primary" onClick={() => updateQuantity(item.productId, item.quantity + 1)}>
-                        <Plus className="h-3 w-3" />
+                      <span className="text-base font-bold w-8 text-center text-white">{item.quantity}</span>
+                      <Button variant="outline" size="icon" className="h-11 w-11 rounded-full border-white/10 bg-white/5 text-primary" onClick={() => updateQuantity(item.productId, item.quantity + 1)}>
+                        <Plus className="h-4 w-4" />
                       </Button>
                     </div>
-                    <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full text-destructive hover:bg-destructive/10" onClick={() => removeItem(item.productId)}>
-                      <Trash2 className="h-4 w-4 text-primary" />
+                    <Button variant="ghost" size="icon" className="h-11 w-11 rounded-full text-destructive hover:bg-destructive/10" onClick={() => removeItem(item.productId)}>
+                      <Trash2 className="h-5 w-5 text-primary" />
                     </Button>
                 </div>
               </motion.div>
