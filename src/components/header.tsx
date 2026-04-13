@@ -1,6 +1,6 @@
 "use client"
 import * as React from "react"
-import { Link } from "~/i18n/routing"
+import { Link, usePathname } from "~/i18n/routing"
 import { Scissors, Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
@@ -12,6 +12,11 @@ import { CartSheet } from "./cart-sheet"
 export function Header() {
   const t = useTranslations('Nav')
   const [isOpen, setIsOpen] = React.useState(false)
+  const pathname = usePathname()
+
+  React.useEffect(() => {
+    setIsOpen(false)
+  }, [pathname])
 
   React.useEffect(() => {
     if (isOpen) {
@@ -26,8 +31,8 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full glass-header backdrop-blur-md bg-background/80 border-b border-white/5 transition-all duration-500">
-      <div className="container flex h-16 items-center justify-between px-6 mx-auto max-w-7xl">
-        <div className="flex items-center gap-8">
+      <div className="container flex h-16 items-center justify-between px-4 md:px-6 mx-auto max-w-7xl">
+        <div className="flex items-center gap-2 md:gap-8">
           <Link href="/" className="flex items-center gap-4 group">
             <motion.div
               whileHover={{ rotate: 5, scale: 1.02 }}
@@ -35,7 +40,7 @@ export function Header() {
             >
               <Scissors className="w-6 h-6" />
             </motion.div>
-            <span className="text-2xl font-bold uppercase tracking-[0.2em] text-foreground">
+            <span className="text-lg md:text-2xl font-bold uppercase tracking-[0.2em] text-foreground">
               BarberShop
             </span>
           </Link>
@@ -45,9 +50,11 @@ export function Header() {
             <Link href="/contact" className="text-[10px] font-black uppercase tracking-[0.3em] text-foreground/40 hover:text-primary transition-colors">{t('contact')}</Link>
           </nav>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-4">
           <CartSheet />
-          <UserNav />
+          <div className="hidden md:block">
+            <UserNav />
+          </div>
           <div className="hidden md:flex items-center gap-6">
             <LanguageSwitcher />
             <ModeToggle />
@@ -81,6 +88,9 @@ export function Header() {
             <div className="flex items-center gap-8 mt-4">
               <LanguageSwitcher />
               <ModeToggle />
+            </div>
+            <div className="mt-4 flex justify-center">
+              <UserNav />
             </div>
           </motion.div>
         )}

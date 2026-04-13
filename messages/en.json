@@ -85,6 +85,7 @@
     "subtitle": "Experience our legacy of exceptional haircuts, styling, and grooming services."
   },
   "Admin": {
+    "admin": "Admin",
     "dashboard": "Dashboard Overview",
     "welcome": "Welcome back! Here's what's happening today.",
     "totalProducts": "Total Products",

@@ -22,9 +22,11 @@ export function UserNav() {
 
   if (!session) {
     return (
-      <Button onClick={() => signIn()} variant="ghost" className="rounded-full px-6 h-11 bg-white/5 hover:bg-white/10 border border-white/10">
-        <User className="mr-2 h-4 w-4" />
-        {t('login')}
+      <Button asChild variant="ghost" className="rounded-full px-6 h-11 bg-white/5 hover:bg-white/10 border border-white/10">
+        <Link href="/login">
+          <User className="mr-2 h-4 w-4" />
+          {t('login')}
+        </Link>
       </Button>
     )
   }

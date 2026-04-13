@@ -231,7 +231,7 @@ export function BookingDialog() {
                     value={date} 
                     onChange={e => setDate(e.target.value)} 
                     required 
-                    className={`border-none bg-foreground/[0.03] h-16 rounded-none text-base px-4 md:px-8 focus:ring-1 focus:ring-primary/20 focus:bg-background transition-all font-medium ${isRtl ? 'text-right' : 'text-left'}`} 
+                    className={`border-none bg-foreground/[0.03] h-16 rounded-none text-base px-4 md:px-8 focus:ring-1 focus:ring-primary/20 focus:bg-background transition-all font-medium [&::-webkit-datetime-edit-placeholder-text]:opacity-50 [&::-webkit-calendar-picker-indicator]:opacity-50 hover:[&::-webkit-calendar-picker-indicator]:opacity-100 [&::-webkit-calendar-picker-indicator]:cursor-pointer cursor-pointer ${isRtl ? 'text-right' : 'text-left'}`} 
                   />
                 </div>
               </div>
